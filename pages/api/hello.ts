@@ -8,7 +8,7 @@ type Data = {
 /**
  *
  * @param {NextApiRequest} req req
- * @param {NextApiResponse} res resa
+ * @param {NextApiResponse} res res
  */
 export default function handler (
   req: NextApiRequest,
