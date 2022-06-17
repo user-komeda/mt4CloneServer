@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier",
+    "google",
+    "plugin:jsdoc/recommended",
+    "prettier" // prettierのextendsは最後に記述
+  ],
+  "plugins": ["@typescript-eslint", "unicorn", "jsdoc"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "root": true,
+  "rules": {
+    "object-curly-spacing": ["off"],
+    "unicorn/filename-case": ["off"],
+    "require-jsdoc": 2
+  },
+  "settings": {
+    "jsdoc": {
+      "tagNamePreference": {
+        "returns": "return"
+      }
+    }
+  }
+}
