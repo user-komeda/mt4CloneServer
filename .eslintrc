@@ -1,4 +1,9 @@
 {
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",
@@ -6,6 +11,7 @@
     "eslint-config-prettier",
     "google",
     "plugin:jsdoc/recommended",
+    "eslint-config-prettier",
     "prettier" // prettierのextendsは最後に記述
   ],
   "plugins": ["@typescript-eslint", "unicorn", "jsdoc"],
@@ -16,8 +22,36 @@
   },
   "root": true,
   "rules": {
-    "object-curly-spacing": ["off"],
-    "unicorn/filename-case": ["off"],
+    "jsdoc/require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "ArrowFunctionExpression": true,
+          "ClassDeclaration": true,
+          "ClassExpression": true,
+          "FunctionDeclaration": true,
+          "FunctionExpression": true,
+          "MethodDefinition": true
+        },
+        "contexts": [
+          "ArrowFunctionDeclaration",
+          "ArrowFunctionExpression",
+          "ClassDeclaration",
+          "ClassExpression",
+          "ClassProperty",
+          "FunctionDeclaration", // function
+          "FunctionExpression",
+          "MethodDefinition",
+          "TSDeclareFunction", // function without body
+          "TSEnumDeclaration",
+          "TSInterfaceDeclaration",
+          "TSModuleDeclaration", // namespace
+          "TSTypeAliasDeclaration"
+        ]
+      }
+    ],
+    "jsdoc/require-param-type": 2,
+    "jsdoc/require-returns": 2,
     "require-jsdoc": 2
   },
   "settings": {
