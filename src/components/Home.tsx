@@ -8,7 +8,7 @@ import FinanceResponseData from '../types/FinanceResponseData'
  */
 const Home: React.FC<{
   responseDataList: Array<FinanceResponseData>
-}> = props => {
+}> = (props) => {
   return (
     <div>
       {props.responseDataList.map((responseData, i) => {

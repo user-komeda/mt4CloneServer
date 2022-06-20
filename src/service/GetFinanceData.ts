@@ -9,10 +9,10 @@ const GetFinanceData = async (requestObject: FinanceRequestData) => {
   const requestUrl = buildURL(requestObject)
   const data = await axios
     .get(requestUrl)
-    .then(response => {
+    .then((response) => {
       return response.data['Time Series FX (60min)']
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error)
       return error
     })
