@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": " next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ./pages/**/*.ts --ext .ts --config .eslintrc --fix",
-    "format": "prettier --write pages/**/*"
+    "lint": "eslint ./src/**/*{.tsx,.ts}  --config .eslintrc ",
+    "format": "prettier --write src/**/*"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "next": "12.1.6",
     "prettier": "^2.7.1",
     "react": "18.2.0",
@@ -19,20 +20,21 @@
     "@types/node": "18.0.0",
     "@types/react": "18.0.13",
     "@types/react-dom": "18.0.5",
-    "@typescript-eslint/eslint-plugin": "^5.14.0",
-    "@typescript-eslint/parser": "^5.14.0",
-    "eslint": "8.17.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.18.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsdoc": "^39.3.2",
+    "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-unicorn": "^40.1.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.1",
     "typescript": "4.7.3"
   },
   "lint-staged": {
-    "./pages/**": [
+    "./src/**/*{.tsx,.ts}": [
       "yarn lint"
     ]
   }
