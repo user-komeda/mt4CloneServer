@@ -1,4 +1,5 @@
 import FinanceResponseData from '../types/FinanceResponseData'
+import ChartComponent from '../components/chart'
 
 /**
  * homeComponent
@@ -8,19 +9,23 @@ import FinanceResponseData from '../types/FinanceResponseData'
  */
 const Home: React.FC<{
   responseDataList: Array<FinanceResponseData>
-}> = (props) => {
+}> = props => {
+  console.log('homeComponent')
   return (
     <div>
+      <ChartComponent
+        responseDataList={props.responseDataList}
+      ></ChartComponent>
       {props.responseDataList.map((responseData, i) => {
         return (
           <div key={i}>
             <p>{responseData.openValue}</p>
-            <p>{responseData.highValue}</p>
-            <p>{responseData.lowValue}</p>
+
             <p>{responseData.closeValue}</p>
           </div>
         )
       })}
+      <p>aaa</p>
     </div>
   )
 }
