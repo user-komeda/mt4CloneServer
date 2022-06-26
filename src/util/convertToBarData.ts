@@ -10,7 +10,7 @@ const converter = (responseData: FinanceResponseData): BarData => {
   const closeValue = Number(responseData.closeValue)
   const barY = Math.min(openValue, closeValue)
 
-  const barX = 70
+  const barX = 100
 
   const barWidth = 10
 

@@ -77,13 +77,42 @@ const ChartComponent: React.FC<{
           data: data,
           options: {
             scales: {
+              x: [
+                {
+                  //x軸設定
+                  barPercentage: 1, //棒グラフ幅
+                  categoryPercentage: 1, //棒グラフ幅
+                },
+              ],
               y: {
                 beginAtZero: false,
               },
             },
+            interaction: {
+              intersect: false,
+              mode: 'index',
+            },
+            onHover: e => {
+              console.dir()
+              // const canvasPosition = Chart.helpers.getRelativePosition(e, chart)
+              // // Substitute the appropriate scale IDs
+              // const dataX = chart.scales.x.getValueForPixel(canvasPosition.x)
+              // const dataY = chart.scales.y.getValueForPixel(canvasPosition.y)
+            },
           },
         })
+        chart.getElementsAtEventForMode
         // chart.destroy()
+        inputRef.current.addEventListener('mousemove', evt => {
+          // const test = chart.getElementsAtEventForMode(
+          //   evt,
+          //   'index',
+          //   chart.options,
+          //   false
+          // )
+          // console.dir(test)
+          // test.
+        })
       }
     }
     // Now we can create and use our new chart type
