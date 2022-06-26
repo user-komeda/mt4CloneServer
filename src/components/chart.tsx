@@ -6,6 +6,7 @@ import {
   CategoryScale,
   Chart,
   LinearScale,
+  Tooltip,
 } from 'chart.js'
 import FinanceResponseData from '../types/FinanceResponseData'
 import convertToBarData from '../util/convertToBarData'
@@ -31,7 +32,7 @@ const ChartComponent: React.FC<{
     Custom.id = 'derivedBubble'
     Custom.defaults = BarController.defaults
     // Stores the controller so that the chart initialization routine can look it up
-    Chart.register(Custom, LinearScale, CategoryScale, BarElement)
+    Chart.register(Custom, LinearScale, CategoryScale, BarElement, Tooltip)
 
     const barData = responseDataList.map(response => {
       return convertToBarData(response)
@@ -62,6 +63,8 @@ const ChartComponent: React.FC<{
           data: barData,
           min: Math.min(...a),
           max: Math.max(...a),
+          backgroundColor: '#3498db',
+
           // data: [
           //   { x: 250, y: 132.73, xWidth: 10, xHeight: 132.99 },
           //   { x: 500, y: 136.73, xWidth: 10, xHeight: 126.99 },
@@ -76,14 +79,28 @@ const ChartComponent: React.FC<{
           type: 'derivedBubble',
           data: data,
           options: {
-            scales: {
-              x: [
-                {
-                  //x軸設定
-                  barPercentage: 1, //棒グラフ幅
-                  categoryPercentage: 1, //棒グラフ幅
+            plugins: {
+              tooltip: {
+                enabled: true,
+                callbacks: {
+                  title: function () {
+                    console.log('aaa')
+                    return 'my tittle'
+                  },
                 },
-              ],
+              },
+              legend: { display: true },
+              title: {
+                display: true,
+                text: 'Test chart',
+                position: 'top',
+              },
+            },
+            scales: {
+              x: {
+                //x軸設定
+                // barPercentage: 1, //棒グラフ幅
+              },
               y: {
                 beginAtZero: false,
               },
@@ -93,7 +110,7 @@ const ChartComponent: React.FC<{
               mode: 'index',
             },
             onHover: e => {
-              console.dir()
+              console.dir(e)
               // const canvasPosition = Chart.helpers.getRelativePosition(e, chart)
               // // Substitute the appropriate scale IDs
               // const dataX = chart.scales.x.getValueForPixel(canvasPosition.x)

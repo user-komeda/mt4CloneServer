@@ -19,9 +19,9 @@ const Home: React.FC<{
       {props.responseDataList.map((responseData, i) => {
         return (
           <div key={i}>
-            <p>{responseData.openValue}</p>
+            {/* <p>{responseData.openValue}</p>
 
-            <p>{responseData.closeValue}</p>
+            <p>{responseData.closeValue}</p> */}
           </div>
         )
       })}

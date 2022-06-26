@@ -37,6 +37,7 @@ export default class Custom extends BarController {
     let x = 66.6
     for (const pt0 of dataList) {
       // const x = pt0['x']
+      ctx.id
       const y = pt0['y']
       const xWidth = pt0['barWidth']
       const xHeight = pt0['barHeight']
