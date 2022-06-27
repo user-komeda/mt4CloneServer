@@ -5,6 +5,7 @@ import {
   BarElement,
   CategoryScale,
   Chart,
+  defaults,
   LinearScale,
   Tooltip,
 } from 'chart.js'
@@ -81,11 +82,22 @@ const ChartComponent: React.FC<{
           options: {
             plugins: {
               tooltip: {
+                mode: 'index',
+                intersect: false,
+                axis: 'x',
+
                 enabled: true,
                 callbacks: {
                   title: function () {
                     console.log('aaa')
                     return 'my tittle'
+                  },
+                  label: function (ctx) {
+                    console.log(ctx)
+                    return 'ちんちん'
+                  },
+                  beforeBody: function () {
+                    console.log('dd')
                   },
                 },
               },
@@ -106,15 +118,9 @@ const ChartComponent: React.FC<{
               },
             },
             interaction: {
-              intersect: false,
               mode: 'index',
-            },
-            onHover: e => {
-              console.dir(e)
-              // const canvasPosition = Chart.helpers.getRelativePosition(e, chart)
-              // // Substitute the appropriate scale IDs
-              // const dataX = chart.scales.x.getValueForPixel(canvasPosition.x)
-              // const dataY = chart.scales.y.getValueForPixel(canvasPosition.y)
+              intersect: false,
+              axis: 'x',
             },
           },
         })

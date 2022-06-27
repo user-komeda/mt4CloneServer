@@ -11,7 +11,7 @@ export default class Custom extends BarController {
    *
    */
   draw () {
-    super.draw()
+    // super.draw()
     const meta = this.getMeta()
     // console.log(meta)
     const data = meta.data
