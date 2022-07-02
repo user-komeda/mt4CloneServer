@@ -13,6 +13,7 @@ import FinanceResponseData from '../types/FinanceResponseData'
 import convertToBarData from '../util/convertToBarData'
 /**
  *
+ * @param props
  */
 const ChartComponent: React.FC<{
   responseDataList: Array<FinanceResponseData>
@@ -65,11 +66,6 @@ const ChartComponent: React.FC<{
           min: Math.min(...a),
           max: Math.max(...a),
           backgroundColor: '#3498db',
-
-          // data: [
-          //   { x: 250, y: 132.73, xWidth: 10, xHeight: 132.99 },
-          //   { x: 500, y: 136.73, xWidth: 10, xHeight: 126.99 },
-          // ],
         },
       ],
     }
@@ -88,17 +84,24 @@ const ChartComponent: React.FC<{
 
                 enabled: true,
                 callbacks: {
+                  /**
+                   *
+                   */
                   title: function () {
-                    console.log('aaa')
                     return 'my tittle'
                   },
+                  /**
+                   *
+                   * @param ctx
+                   */
                   label: function (ctx) {
                     console.log(ctx)
                     return 'ちんちん'
                   },
-                  beforeBody: function () {
-                    console.log('dd')
-                  },
+                  /**
+                   *
+                   */
+                  beforeBody: function () {},
                 },
               },
               legend: { display: true },
@@ -110,7 +113,7 @@ const ChartComponent: React.FC<{
             },
             scales: {
               x: {
-                //x軸設定
+                // x軸設定
                 // barPercentage: 1, //棒グラフ幅
               },
               y: {

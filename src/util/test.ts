@@ -1,7 +1,5 @@
 import { BarController } from 'chart.js'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-
-import { BubbleController } from 'chart.js'
+import checkFillColorBlue from './checkFillColor'
 
 /**
  *
@@ -11,60 +9,69 @@ export default class Custom extends BarController {
    *
    */
   draw () {
-    // super.draw()
     const meta = this.getMeta()
-    // console.log(meta)
-    const data = meta.data
     const dataList: any = meta.controller.getDataset().data
-    // console.log(dataList)
     const dataSet: any = meta.controller.getDataset()
+    // スケールの最小値
     const minValue = dataSet['min']
+    // スケールの最大値
     const maxValue = dataSet['max']
+    // メモリ増加量
     const par = (maxValue - minValue) / 10
     const width = meta.data[0]['width']
-    const xp = meta.data[0]['x']
-    // dataList.pop()
-    // dataList.pop()
 
     const ctx = this.chart.ctx
+
     ctx.strokeStyle = 'blue'
     ctx.lineWidth = 0.5
     ctx.fillStyle = 'red'
-    // ctx.canvas.width = 1000
-    // ctx.canvas.height = 600
 
     let count = 1
-    let x = 66.6
     for (const pt0 of dataList) {
-      // const x = pt0['x']
-      ctx.id
+      // openValueCloseValueの最小値
       const y = pt0['y']
-      const xWidth = pt0['barWidth']
+
+      // openValueCloseValueの最小値
       const xHeight = pt0['barHeight']
+
+      const openValue = pt0['openValue']
+      const closeValue = pt0['closeValue']
+      const highValue = pt0['highValue']
+      const lowValue = pt0['lowValue']
+
+      ctx.fillStyle = checkFillColorBlue(openValue, closeValue)
+        ? 'rgb(0, 0, 255)'
+        : 'rgb(255, 0, 0)'
+
+      // 全体の百分率
       const par2 = 100 - ((y - minValue) / par) * 10
+      // 全体の百分率
       const par3 = 100 - ((xHeight - minValue) / par) * 10
-      ctx.strokeRect(
+
+      const par4 = 100 - ((highValue - minValue) / par) * 10
+
+      const par5 = 100 - ((lowValue - minValue) / par) * 10
+
+      ctx.fillRect(
         meta.data[count - 1]['x'] - 8.5,
         meta.data[count - 1]['y'],
         Number(width),
         (600 * par3) / 100 - (600 * par2) / 100
       )
-      x += 23.5
-      // ctx.strokeRect(900, 600 - (600 - 135.2), Number(xWidth), 10)
-      // ctx.strokeRect(950, 10, Number(xWidth), 1)
-
+      ctx.strokeRect(
+        meta.data[count - 1]['x'] - 8.5 + Number(width) / 2,
+        meta.data[count - 1]['y'],
+        1,
+        (600 * par5) / 100 - (600 * par3) / 100
+      )
+      const x = (600 * par2) / 100 - (600 * par3) / 100
+      ctx.strokeRect(
+        meta.data[count - 1]['x'] - 8.5 + Number(width) / 2,
+        meta.data[count - 1]['y'] - x,
+        1,
+        (600 * par4) / 100 - (600 * par3) / 100
+      )
       count++
-      // break
-      // this.draw()
     }
-    // //現在のパスを輪郭表示する
-    // ctx.stroke()
-    // ctx.strokeRect(200, 135, 7, 300.99)
-    // ctx.strokeRect(250, 137, 7, 400)
-    // ctx.strokeRect(55, 100, 7, 1000)
-    // ctx.strokeRect(60, 100, 7, 1000)
-    // ctx.strokeRect(65, 100, 7, 1000)
-    // ctx.strokeRect(70, 100, 7, 1000)
-    // ctx.strokeRect(75, 100, 7, 1000)
   }
 }
