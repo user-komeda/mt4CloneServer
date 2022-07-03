@@ -14,10 +14,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   requestObject.function = 'FX_INTRADAY'
   requestObject.fromSymbol = 'USD'
   requestObject.toSymbol = 'JPY'
-  requestObject.interval = SizeType['60MIN']
+  requestObject.interval = SizeType['5MIN']
   const responseDataList = await getFinanceData(requestObject)
-
-  console.log(getFinanceData(requestObject))
 
   const props: Props = {
     responseDataList: responseDataList,

@@ -10,7 +10,7 @@ const GetFinanceData = async (requestObject: FinanceRequestData) => {
   const data = await axios
     .get(requestUrl)
     .then((response) => {
-      return response.data['Time Series FX (60min)']
+      return response.data['Time Series FX (5min)']
     })
     .catch((error) => {
       console.error(error)
@@ -25,7 +25,6 @@ const GetFinanceData = async (requestObject: FinanceRequestData) => {
     const keyList2 = Object.keys(data[key])
     for (const key2 of keyList2) {
       if (loopCount > 3) {
-        console.log(key)
         loopCount = 0
         break
       }
@@ -77,7 +76,7 @@ const buildURL = (requestObject: FinanceRequestData): string => {
     'apikey',
     requestObject.apiKey ? requestObject.apiKey : ''
   )
-  requestUrl.searchParams.append('outputsize', 'full')
+  // requestUrl.searchParams.append('outputsize', 'full')
 
   return requestUrl.toString()
 }
