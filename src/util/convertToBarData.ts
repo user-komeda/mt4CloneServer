@@ -1,17 +1,21 @@
-import BarData from '../types/barData'
+import BarData from '../types/BarData'
 import FinanceResponseData from '../types/FinanceResponseData'
 
 /**
+ * responseDataからbarData作成関数
  *
- * @param responseData
+ * @param {FinanceResponseData} responseData responseData
+ * @return {BarData} barData
  */
 const convertToBarData = (responseData: FinanceResponseData): BarData => {
   return converter(responseData)
 }
 
 /**
+ * responseDataからbarData作成関数
  *
- * @param responseData
+ * @param {FinanceResponseData} responseData responseData
+ * @return {BarData} barData
  */
 const converter = (responseData: FinanceResponseData): BarData => {
   const openValue = Number(responseData.openValue)

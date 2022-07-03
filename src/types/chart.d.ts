@@ -1,13 +1,11 @@
-import { ChartTypeRegistry } from 'chart.js'
-
 /**
- *
+ *型定義
  */
 declare module 'chart.js' {
   /**
-   *
+   *型定義
    */
   interface ChartTypeRegistry {
-    derivedBubble: ChartTypeRegistry['bar']
+    derivedBubble: ChartTypeRegistry['derivedBubble']
   }
 }

@@ -5,15 +5,18 @@ import {
   BarElement,
   CategoryScale,
   Chart,
-  defaults,
   LinearScale,
   Tooltip,
 } from 'chart.js'
 import FinanceResponseData from '../types/FinanceResponseData'
 import convertToBarData from '../util/convertToBarData'
+import getLabelValue from '../util/getLabelValue'
+import getTitleValue from '../util/getTitleValue'
 /**
+ *chartComponent
  *
- * @param props
+ * @param {*} props props
+ * @return {*} jsx
  */
 const ChartComponent: React.FC<{
   responseDataList: Array<FinanceResponseData>
@@ -33,38 +36,33 @@ const ChartComponent: React.FC<{
     }
     Custom.id = 'derivedBubble'
     Custom.defaults = BarController.defaults
-    // Stores the controller so that the chart initialization routine can look it up
     Chart.register(Custom, LinearScale, CategoryScale, BarElement, Tooltip)
 
     const barData = responseDataList.map(response => {
       return convertToBarData(response)
     })
-    const test = { x: 70, y: 136.0, barWidth: 10, barHeight: 136.0 }
-    const test2 = { x: 70, y: 134.0, barWidth: 10, barHeight: 134.0 }
-    barData.push(test)
-    barData.push(test2)
 
-    const a = []
+    const maxDataList = []
     for (const responseData of responseDataList) {
-      a.push(Number(responseData.openValue))
-      a.push(Number(responseData.closeValue))
-      // a.push(Number(responseData.highValue))
-      // a.push(Number(responseData.lowValue))
+      maxDataList.push(Number(responseData.highValue))
+      maxDataList.push(Number(responseData.lowValue))
     }
-    a.push(136.0)
-    a.push(134.0)
+
+    const max = Math.floor(Math.max(...maxDataList)) + 1
+    const min = Math.floor(Math.min(...maxDataList)) - 1
 
     const labels = responseDataList.map(responseData => {
       return responseData.date
     })
+
     const data = {
       labels: labels,
       datasets: [
         {
           label: 'My First Dataset',
           data: barData,
-          min: Math.min(...a),
-          max: Math.max(...a),
+          min: min,
+          max: max,
           backgroundColor: '#3498db',
         },
       ],
@@ -72,7 +70,7 @@ const ChartComponent: React.FC<{
     if (inputRef) {
       const ctx = inputRef.current.getContext('2d')
       if (ctx !== null) {
-        const chart = new Chart(ctx, {
+        new Chart(ctx, {
           type: 'derivedBubble',
           data: data,
           options: {
@@ -85,30 +83,24 @@ const ChartComponent: React.FC<{
                 enabled: true,
                 callbacks: {
                   /**
+                   * title表示
                    *
+                   * @param {*} ctx ctx
+                   * @return {string} title
                    */
-                  title: function () {
-                    return 'my tittle'
+                  title: (ctx: any[]): string => {
+                    return getTitleValue(ctx[0])
                   },
                   /**
+                   *label表示
                    *
-                   * @param ctx
+                   * @param {*} ctx ctx
+                   * @return {Array<string>} label
                    */
-                  label: function (ctx) {
-                    console.log(ctx)
-                    return 'ちんちん'
+                  label: (ctx: any): Array<string> => {
+                    return getLabelValue(ctx)
                   },
-                  /**
-                   *
-                   */
-                  beforeBody: function () {},
                 },
-              },
-              legend: { display: true },
-              title: {
-                display: true,
-                text: 'Test chart',
-                position: 'top',
               },
             },
             scales: {
@@ -120,28 +112,10 @@ const ChartComponent: React.FC<{
                 beginAtZero: false,
               },
             },
-            interaction: {
-              mode: 'index',
-              intersect: false,
-              axis: 'x',
-            },
           },
-        })
-        chart.getElementsAtEventForMode
-        // chart.destroy()
-        inputRef.current.addEventListener('mousemove', evt => {
-          // const test = chart.getElementsAtEventForMode(
-          //   evt,
-          //   'index',
-          //   chart.options,
-          //   false
-          // )
-          // console.dir(test)
-          // test.
         })
       }
     }
-    // Now we can create and use our new chart type
   }, [])
 
   return (

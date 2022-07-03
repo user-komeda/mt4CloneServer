@@ -1,5 +1,5 @@
 /**
- *
+ * 型定義
  */
 export default interface BarData {
   x: number
