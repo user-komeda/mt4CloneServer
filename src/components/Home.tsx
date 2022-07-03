@@ -9,7 +9,7 @@ import ChartComponent from '../components/chart'
  */
 const Home: React.FC<{
   responseDataList: Array<FinanceResponseData>
-}> = props => {
+}> = (props) => {
   console.log('homeComponent')
   return (
     <div>

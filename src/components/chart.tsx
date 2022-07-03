@@ -20,10 +20,10 @@ import getTitleValue from '../util/getTitleValue'
  */
 const ChartComponent: React.FC<{
   responseDataList: Array<FinanceResponseData>
-}> = props => {
-  const inputRef = useRef<HTMLCanvasElement>(null) as React.MutableRefObject<
-    HTMLCanvasElement
-  >
+}> = (props) => {
+  const inputRef = useRef<HTMLCanvasElement>(
+    null
+  ) as React.MutableRefObject<HTMLCanvasElement>
 
   const renderFlgRef = useRef(false)
   const responseDataList = props.responseDataList
@@ -38,7 +38,7 @@ const ChartComponent: React.FC<{
     Custom.defaults = BarController.defaults
     Chart.register(Custom, LinearScale, CategoryScale, BarElement, Tooltip)
 
-    const barData = responseDataList.map(response => {
+    const barData = responseDataList.map((response) => {
       return convertToBarData(response)
     })
 
@@ -51,7 +51,7 @@ const ChartComponent: React.FC<{
     const max = Math.floor(Math.max(...maxDataList)) + 1
     const min = Math.floor(Math.min(...maxDataList)) - 1
 
-    const labels = responseDataList.map(responseData => {
+    const labels = responseDataList.map((responseData) => {
       return responseData.date
     })
 

@@ -10,7 +10,7 @@ export default class Custom extends BarController {
   /**
    * cartの描画
    */
-  draw () {
+  draw() {
     const meta = this.getMeta()
     const dataList: any = meta.controller.getDataset().data
     const dataSet: any = meta.controller.getDataset()
